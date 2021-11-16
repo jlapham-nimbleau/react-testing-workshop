@@ -30,7 +30,9 @@ const food = [{
 const List = () => {
   return (
     <ul>
-      {food.map(item => <li key={`${item.id}-${item.label}`}>{item.label}</li>)}
+      {food.map(item => (
+        <li key={`${item.id}-${item.label}`}>{item.label}</li>
+      ))}
     </ul>
   )
 }
