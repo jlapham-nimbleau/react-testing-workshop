@@ -4,3 +4,20 @@
 2. Add a button that increments the counter
 3. Make a second component that will display the current count
 4. Pass the current count into the count display as a prop
+
+```jsx
+const Counter = () => {
+  const [count, setCount] = useState(0);
+  const buttonHandler = () => setCount(count + 1);
+
+  return (
+    <button onClick={buttonHandler}>Increment Counter</button>
+  )
+}
+
+const CounterViewer = ({ displayValue }) => {
+  return (
+    <div>Current count: {displayValue}</div>
+  )
+}
+```
