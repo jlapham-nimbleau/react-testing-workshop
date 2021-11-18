@@ -1,24 +1,42 @@
 Refactor this code to use Context instead of props:
 
 ```js
-function Outer(){
-  const message = "Hello, world!"
+import { createContext, useState } from "react"
+
+export const UserContext = createContext()
+
+export const UserContextProvider = ({ children }) => {
+  const [message, setMessage] = useState({
+    message: "Hello, world!",
+  })
+
   return (
-    <Middle message={ message } />
+    <UserContext.Provider value={{ message, setMessage }}>
+      {children}
+    </UserContext.Provider>
   )
 }
 
-function Middle({ message }){
-  return (
-    <Inner message={ message } />
-  )
-}
+<UserContextProvider>
+  function Outer(){
+    return (
+      <Middle />
+    )
+  }
 
-function Inner({ message }){
-  return (
-    <p>{ message }</p>
-  )
-}
+  function Middle(){
+    return (
+      <Inner />
+    )
+  }
+
+  function Inner(){
+    const { message, setMessage } = useContext(UserContext)
+    return (
+      <p>{ message }</p>
+    )
+  }
+</UserContextProvider>
 ```
 
 ---
